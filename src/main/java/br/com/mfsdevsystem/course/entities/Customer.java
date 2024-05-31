@@ -10,36 +10,34 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "users")
-public class User implements Serializable{
+@Table(name = "customers")
+public class Customer implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;	
-	private String name;
-	private String email;
-	private String phone;
-	private String password;
 
-	public User() {
-		
-	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;	    
+	private String name;    
+	private String email;
 	
-	public User(Long id, String name, String email, String phone, String password) {
+	public Customer(String name, String email) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
-		this.phone = phone;
-		this.password = password;
+	}
+	 	
+	public Customer(long id, String name, String email) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -59,22 +57,6 @@ public class User implements Serializable{
 		this.email = email;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -88,9 +70,9 @@ public class User implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
-		return Objects.equals(id, other.id);
+		Customer other = (Customer) obj;
+		return id == other.id;
 	}
-
 	
+	 
 }
