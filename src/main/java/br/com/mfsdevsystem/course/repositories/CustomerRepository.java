@@ -1,4 +1,4 @@
-package br.com.mfsdevsystem.course.repository;
+package br.com.mfsdevsystem.course.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
