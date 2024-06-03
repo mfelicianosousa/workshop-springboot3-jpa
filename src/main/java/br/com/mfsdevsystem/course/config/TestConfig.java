@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import br.com.mfsdevsystem.course.entities.Category;
 import br.com.mfsdevsystem.course.entities.Order;
 import br.com.mfsdevsystem.course.entities.OrderItem;
+import br.com.mfsdevsystem.course.entities.Payment;
 import br.com.mfsdevsystem.course.entities.Product;
 import br.com.mfsdevsystem.course.entities.User;
 import br.com.mfsdevsystem.course.enums.OrderStatus;
@@ -87,6 +88,14 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi5 = new OrderItem(o5, p4, 1, p4.getPrice());
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4, oi5));
+		
+		// Salvando Pagamento
+	    Payment pay1 = new Payment(null, Instant.parse("2024-06-01T21:53:07Z"), o1);
+	    // Atualiza no pedido o Pagamento
+	    o1.setPayment(pay1);
+	    // Salva o Order novamente;
+	    orderRepository.save(o1);
+	    
 	}
 	
 	
