@@ -11,6 +11,7 @@ import br.com.mfsdevsystem.course.entities.User;
 import br.com.mfsdevsystem.course.repositories.UserRepository;
 import br.com.mfsdevsystem.course.services.exceptions.DatabaseException;
 import br.com.mfsdevsystem.course.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class UserService {
@@ -58,9 +59,14 @@ public class UserService {
 
 	
 	public User update(Long id, User user) {
-		User entity = userRepository.getReferenceById( id );
-		updateData(entity, user);
-		return userRepository.save( entity );
+		try {
+			User entity = userRepository.getReferenceById( id );
+			updateData(entity, user);
+			return userRepository.save( entity );
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
+		
 	}
 
 	private void updateData(User entity, User user) {
